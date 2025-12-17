@@ -10,10 +10,7 @@ const port = process.env.PORT || 8001;
 app.use(express.json());
 app.use(cors());
 
-
-// Connect to MongoDB
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/MERN';
-mdb.connect(mongoURI)
+mdb.connect("mongodb+srv://cys:cys@internship.4hnpeon.mongodb.net/")
   .then(() => console.log("MongoDB connection successful"))
   .catch((err) => console.log("MongoDB connection unsuccessful", err));
 

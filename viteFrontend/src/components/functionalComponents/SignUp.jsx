@@ -16,7 +16,7 @@ const Signup = () => {
     setSuccess("");
     
     try {
-      const response = await axios.post('https://classroom-project-pavithra-m2007.onrender.com', { username, email, password });
+      const response = await axios.post('https://winter-internship-5w5q.onrender.com/signup', { username, email, password });
       setSuccess(response.data.Message);
       setTimeout(() => navigate('/login'), 2000);
     } catch (error) {

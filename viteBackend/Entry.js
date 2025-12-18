@@ -7,7 +7,11 @@ const app = express();
 const port = process.env.PORT || 8001;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 mdb.connect("mongodb+srv://cys:cys@internship.4hnpeon.mongodb.net/")
   .then(() => console.log("MongoDB connection successful"))
@@ -21,6 +25,11 @@ app.get("/", (req, res) => {
 // Signup route
 app.post('/signup', async (req, res) => {
     const { email, username, password } = req.body;
+    
+    if (!email || !username || !password) {
+        return res.status(400).json({ Message: "All fields are required" });
+    }
+    
     try {
         // Check if user already exists
         const existingUser = await signup.findOne({ email });
@@ -40,14 +49,13 @@ app.post('/signup', async (req, res) => {
 
         await newSignup.save();
 
-        // Return user info including hashed password
+        // Return success without password
         res.json({
             Message: "Signup successful",
             user: {
                 _id: newSignup._id,
                 email: newSignup.email,
-                username: newSignup.username,
-                password: newSignup.password // hashed password
+                username: newSignup.username
             }
         });
     } catch (error) {

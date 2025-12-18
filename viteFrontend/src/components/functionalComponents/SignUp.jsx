@@ -16,7 +16,7 @@ const Signup = () => {
     setSuccess("");
     
     try {
-      const response = await axios.post('http://localhost:8001/signup', { username, email, password });
+      const response = await axios.post('https://winter-internship-5w5q.onrender.com/signup', { username, email, password });
       setSuccess(response.data.Message);
       alert(response.data.Message); // Show success message
       setTimeout(() => navigate('/login'), 1500); // Redirect to login after 1.5 seconds

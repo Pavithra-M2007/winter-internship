@@ -23,7 +23,7 @@ const Login = () => {
     }
     
     try {
-      const response = await axios.post('http://localhost:8001/login', { email, password });
+      const response = await axios.post('https://winter-internship-5w5q.onrender.com/login', { email, password });
       if (response.data.isLoggedIn) {
         alert(response.data.Message); // Show success message
         login(response.data.user);

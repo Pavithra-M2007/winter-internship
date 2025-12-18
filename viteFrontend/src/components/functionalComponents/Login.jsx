@@ -17,13 +17,15 @@ const Login = () => {
     // Demo login for testing
     if (email === "test@test.com" && password === "test") {
       login({ email: "test@test.com", username: "Test User" });
+      alert("Login successful"); // Show success message
       navigate('/learn-react');
       return;
     }
     
     try {
-      const response = await axios.post('https://winter-internship-5w5q.onrender.com/login', { email, password });
+      const response = await axios.post('http://localhost:8001/login', { email, password });
       if (response.data.isLoggedIn) {
+        alert(response.data.Message); // Show success message
         login(response.data.user);
         navigate('/learn-react');
       } else {
